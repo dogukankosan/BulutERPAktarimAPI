@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.36617.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulutERPAktarim", "BulutERPAktarim\BulutERPAktarim.csproj", "{F70AF6B8-032A-4390-B554-EAAE83D0E3E6}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "BulutERPAktarimSetup", "BulutERPAktarimSetup\BulutERPAktarimSetup.vdproj", "{9D4E6A38-4ECA-406A-8714-D7431ECAD4A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F70AF6B8-032A-4390-B554-EAAE83D0E3E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F70AF6B8-032A-4390-B554-EAAE83D0E3E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F70AF6B8-032A-4390-B554-EAAE83D0E3E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F70AF6B8-032A-4390-B554-EAAE83D0E3E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D4E6A38-4ECA-406A-8714-D7431ECAD4A7}.Debug|Any CPU.ActiveCfg = Debug
+		{9D4E6A38-4ECA-406A-8714-D7431ECAD4A7}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {94583096-B781-4CAE-A293-F95A89722964}
+	EndGlobalSection
+EndGlobal
