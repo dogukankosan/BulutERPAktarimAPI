@@ -1,0 +1,6 @@
+@BulutERPAktarimAPI_HostAddress = http://localhost:5298
+
+GET {{BulutERPAktarimAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

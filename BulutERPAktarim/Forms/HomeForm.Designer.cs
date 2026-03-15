@@ -51,6 +51,9 @@ namespace BulutERPAktarim.Forms
             this.accordionControl1 = new DevExpress.XtraBars.Navigation.AccordionControl();
             this.accordionElementOperations = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.accordionElementMaterialTransfer = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.btn_ProductUpdate = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.btn_ProductPriceForm = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.btn_ProductPriceAdd = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.accordionSeparatorTop = new DevExpress.XtraBars.Navigation.AccordionControlSeparator();
             this.accordionElementSettings = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             this.accordionElementCloudERPSettings = new DevExpress.XtraBars.Navigation.AccordionControlElement();
@@ -115,7 +118,10 @@ namespace BulutERPAktarim.Forms
             // accordionElementOperations
             // 
             this.accordionElementOperations.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
-            this.accordionElementMaterialTransfer});
+            this.accordionElementMaterialTransfer,
+            this.btn_ProductUpdate,
+            this.btn_ProductPriceAdd,
+            this.btn_ProductPriceForm});
             this.accordionElementOperations.Expanded = true;
             this.accordionElementOperations.Name = "accordionElementOperations";
             this.accordionElementOperations.Text = "İşlemler";
@@ -124,8 +130,29 @@ namespace BulutERPAktarim.Forms
             // 
             this.accordionElementMaterialTransfer.Name = "accordionElementMaterialTransfer";
             this.accordionElementMaterialTransfer.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
-            this.accordionElementMaterialTransfer.Text = "📦  Malzeme Aktarımı";
+            this.accordionElementMaterialTransfer.Text = "📦  Malzeme Ekleme";
             this.accordionElementMaterialTransfer.Click += new System.EventHandler(this.AccordionElementMaterialTransfer_Click);
+            // 
+            // btn_ProductUpdate
+            // 
+            this.btn_ProductUpdate.Name = "btn_ProductUpdate";
+            this.btn_ProductUpdate.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.btn_ProductUpdate.Text = "🕸 Malzeme Güncelleme";
+            this.btn_ProductUpdate.Click += new System.EventHandler(this.btn_ProductUpdate_Click);
+            // 
+            // btn_ProductPriceForm
+            // 
+            this.btn_ProductPriceForm.Name = "btn_ProductPriceForm";
+            this.btn_ProductPriceForm.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.btn_ProductPriceForm.Text = "🦾 Malzeme Satış Fiyat Güncelleme";
+            this.btn_ProductPriceForm.Click += new System.EventHandler(this.btn_ProductPriceForm_Click);
+            // 
+            // btn_ProductPriceAdd
+            // 
+            this.btn_ProductPriceAdd.Name = "btn_ProductPriceAdd";
+            this.btn_ProductPriceAdd.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.btn_ProductPriceAdd.Text = "🐱‍🚀 Malzeme Satış Fiyatı Ekle";
+            this.btn_ProductPriceAdd.Click += new System.EventHandler(this.btn_ProductPriceAdd_Click);
             // 
             // accordionSeparatorTop
             // 
@@ -274,7 +301,6 @@ namespace BulutERPAktarim.Forms
             this.NavigationControl = this.accordionControl1;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mutlu Yazılım - Bulut ERP Aktarım";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HomeForm_FormClosing);
             this.Load += new System.EventHandler(this.HomeForm_Load);
             this.fluentDesignFormContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControlMain)).EndInit();
@@ -286,5 +312,9 @@ namespace BulutERPAktarim.Forms
             this.PerformLayout();
 
         }
+
+        private DevExpress.XtraBars.Navigation.AccordionControlElement btn_ProductPriceForm;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement btn_ProductPriceAdd;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement btn_ProductUpdate;
     }
 }

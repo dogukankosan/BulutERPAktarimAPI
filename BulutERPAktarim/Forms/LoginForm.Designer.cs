@@ -38,6 +38,7 @@ namespace BulutERPAktarim.Forms
             this.txtKullaniciAdi = new DevExpress.XtraEditors.TextEdit();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.lblLicenseStatus = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -139,6 +140,7 @@ namespace BulutERPAktarim.Forms
             this.panelControl2.Controls.Add(this.panelControl3);
             this.panelControl2.Controls.Add(this.labelControl4);
             this.panelControl2.Controls.Add(this.labelControl3);
+            this.panelControl2.Controls.Add(this.lblLicenseStatus);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl2.Location = new System.Drawing.Point(380, 0);
             this.panelControl2.Name = "panelControl2";
@@ -203,7 +205,7 @@ namespace BulutERPAktarim.Forms
             // 
             // separatorControl1
             // 
-            this.separatorControl1.Location = new System.Drawing.Point(100, 470);
+            this.separatorControl1.Location = new System.Drawing.Point(100, 498);
             this.separatorControl1.Name = "separatorControl1";
             this.separatorControl1.Size = new System.Drawing.Size(320, 23);
             this.separatorControl1.TabIndex = 7;
@@ -216,7 +218,7 @@ namespace BulutERPAktarim.Forms
             this.hyperlinkLabelControl1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.hyperlinkLabelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             this.hyperlinkLabelControl1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.hyperlinkLabelControl1.Location = new System.Drawing.Point(100, 510);
+            this.hyperlinkLabelControl1.Location = new System.Drawing.Point(100, 538);
             this.hyperlinkLabelControl1.Name = "hyperlinkLabelControl1";
             this.hyperlinkLabelControl1.Size = new System.Drawing.Size(320, 20);
             this.hyperlinkLabelControl1.TabIndex = 4;
@@ -331,6 +333,21 @@ namespace BulutERPAktarim.Forms
             this.labelControl3.TabIndex = 0;
             this.labelControl3.Text = "Kullanıcı Adı";
             // 
+            // lblLicenseStatus
+            // 
+            this.lblLicenseStatus.Appearance.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.lblLicenseStatus.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(140)))), ((int)(((byte)(141)))));
+            this.lblLicenseStatus.Appearance.Options.UseFont = true;
+            this.lblLicenseStatus.Appearance.Options.UseForeColor = true;
+            this.lblLicenseStatus.Appearance.Options.UseTextOptions = true;
+            this.lblLicenseStatus.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.lblLicenseStatus.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblLicenseStatus.Location = new System.Drawing.Point(100, 458);
+            this.lblLicenseStatus.Name = "lblLicenseStatus";
+            this.lblLicenseStatus.Size = new System.Drawing.Size(320, 18);
+            this.lblLicenseStatus.TabIndex = 9;
+            this.lblLicenseStatus.Visible = false;
+            // 
             // LoginForm
             // 
             this.AcceptButton = this.btnGiris;
@@ -345,6 +362,7 @@ namespace BulutERPAktarim.Forms
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bulut ERP Aktarım - Giriş";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoginForm_FormClosing);
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
@@ -388,5 +406,6 @@ namespace BulutERPAktarim.Forms
         private DevExpress.XtraEditors.SimpleButton btn_Hide;
         private DevExpress.XtraEditors.SimpleButton btn_Close;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private DevExpress.XtraEditors.LabelControl lblLicenseStatus;
     }
 }

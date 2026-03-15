@@ -75,21 +75,6 @@ namespace BulutERPAktarim.Forms
         #endregion
 
         #region Dosya Seç / Yükle
-        private void BtnDosyaSec_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog dlg = new OpenFileDialog())
-            {
-                dlg.Title = "Excel Dosyası Seç";
-                dlg.Filter = "Excel Dosyaları (*.xlsx;*.xls)|*.xlsx;*.xls|Tüm Dosyalar (*.*)|*.*";
-                dlg.FilterIndex = 1;
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    textEditDosyaYolu.Text = dlg.FileName;
-                    SetDurum($"Dosya seçildi: {Path.GetFileName(dlg.FileName)}", false);
-                    YukleExcel(textEditDosyaYolu.Text);
-                }       
-            }
-        }
         private void YukleExcel(string dosyaYolu)
         {
             try
@@ -344,15 +329,24 @@ namespace BulutERPAktarim.Forms
             labelControlSecili.Text = $"Seçili: {secili}";
             labelControlHata.Text = $"Hata: {hata}";
             labelControlHata.Appearance.ForeColor = hata > 0 ? Color.Red : Color.Green;
+        }// 5) Yardımcı metod — tek yerde tanımla, 4 metod da bunu kullansın
+        private bool IsKilitliSatir(ExcelMalzemeRow row)
+        {
+            return row.LogodaVar ||
+                   row.Durum == "Hata" ||
+                   row.Durum == "Format Hatası" ||
+                   row.Durum == "Aktarıldı" ||
+                   row.Durum == "Aktarıldı (Fiyat Hatası)" ||
+                   row.Durum == "Aktarıldı (Fiş Hatası)" ||
+                   row.Durum == "Zaten Var";
         }
         private void GridView_CustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
         {
             if (e.Column.FieldName == "Sec")
             {
-                if (gridView.GetRow(e.RowHandle) is ExcelMalzemeRow row &&
-                    (row.LogodaVar || row.Durum == "Hata"))
+                if (gridView.GetRow(e.RowHandle) is ExcelMalzemeRow row && IsKilitliSatir(row))
                 {
-                    RepositoryItemCheckEdit readOnly = new RepositoryItemCheckEdit();
+                    var readOnly = new RepositoryItemCheckEdit();
                     readOnly.ReadOnly = true;
                     e.RepositoryItem = readOnly;
                 }
@@ -396,7 +390,7 @@ namespace BulutERPAktarim.Forms
         #region Seç / Temizle
         private void BtnTumunuSec_Click(object sender, EventArgs e)
         {
-            foreach (ExcelMalzemeRow row in _filtreliListe.Where(x => x.IsValid && !x.LogodaVar && x.Durum != "Hata"))
+            foreach (ExcelMalzemeRow row in _filtreliListe.Where(x => x.IsValid && !IsKilitliSatir(x)))
                 row.Sec = true;
             gridView.RefreshData();
             GuncelleSayaclar();
@@ -558,6 +552,8 @@ namespace BulutERPAktarim.Forms
                         else
                         {
                             row.Durum = "Aktarıldı";
+                            row.LogodaVar = true;  // ← BU SATIRI EKLE
+                            row.Sec = false;        // ← BU SATIRI EKLE
                             row.HataMesaji = "";
                         }
                         basarili++;
@@ -814,8 +810,7 @@ namespace BulutERPAktarim.Forms
         {
             if (gridView.FocusedColumn?.FieldName == "Sec")
             {
-                if (gridView.GetFocusedRow() is ExcelMalzemeRow row &&
-                    (row.LogodaVar || row.Durum == "Hata"))
+                if (gridView.GetFocusedRow() is ExcelMalzemeRow row && IsKilitliSatir(row))
                     e.Cancel = true;
             }
         }
@@ -823,8 +818,7 @@ namespace BulutERPAktarim.Forms
         {
             if (e.Column.FieldName == "Sec")
             {
-                if (gridView.GetRow(e.RowHandle) is ExcelMalzemeRow row &&
-                    (row.LogodaVar || row.Durum == "Hata"))
+                if (gridView.GetRow(e.RowHandle) is ExcelMalzemeRow row && IsKilitliSatir(row))
                     gridView.SetRowCellValue(e.RowHandle, e.Column, false);
             }
         }
@@ -834,8 +828,7 @@ namespace BulutERPAktarim.Forms
             {
                 if (gridView.IsRowSelected(i))
                 {
-                    if (gridView.GetRow(i) is ExcelMalzemeRow row &&
-                        (row.LogodaVar || row.Durum == "Hata"))
+                    if (gridView.GetRow(i) is ExcelMalzemeRow row && IsKilitliSatir(row))
                     {
                         gridView.UnselectRow(i);
                         row.Sec = false;
@@ -1043,6 +1036,21 @@ namespace BulutERPAktarim.Forms
             b.Bottom.Color.SetColor(System.Drawing.Color.FromArgb(189, 189, 189));
             b.Left.Color.SetColor(System.Drawing.Color.FromArgb(189, 189, 189));
             b.Right.Color.SetColor(System.Drawing.Color.FromArgb(189, 189, 189));
+        }
+        private void btnDosyaSec_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog dlg = new OpenFileDialog())
+            {
+                dlg.Title = "Excel Dosyası Seç";
+                dlg.Filter = "Excel Dosyaları (*.xlsx;*.xls)|*.xlsx;*.xls|Tüm Dosyalar (*.*)|*.*";
+                dlg.FilterIndex = 1;
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    textEditDosyaYolu.Text = dlg.FileName;
+                    SetDurum($"Dosya seçildi: {Path.GetFileName(dlg.FileName)}", false);
+                    YukleExcel(textEditDosyaYolu.Text);
+                }
+            }
         }
     }
 }

@@ -13,8 +13,8 @@ namespace BulutERPAktarim.Forms
         public HomeForm()
         {
             InitializeComponent();
-            // Tema değişikliğini dinle — kullanıcı tema seçer seçmez otomatik kaydet
             UserLookAndFeel.Default.StyleChanged += UserLookAndFeel_StyleChanged;
+            this.FormClosed += (s, e) => Application.Exit();
         }
         // ── Form Events ──────────────────────────────────────────────
         private async void HomeForm_Load(object sender, EventArgs e)
@@ -24,10 +24,6 @@ namespace BulutERPAktarim.Forms
             barItemVersion.Caption = $"v{version.Major}.{version.Minor}.{version.Build}";
             // Kullanıcının kayıtlı temasını yükle
             await ThemeManager.LoadUserThemeAsync();
-        }
-        private void HomeForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
         }
         // ── Tema ─────────────────────────────────────────────────────
         /// <summary>
@@ -48,6 +44,7 @@ namespace BulutERPAktarim.Forms
         // ── Helpers ──────────────────────────────────────────────────
         private void LoadForm(Form form)
         {
+         
             panelControlMain.Controls.Clear();
             form.TopLevel = false;
             form.FormBorderStyle = FormBorderStyle.None;
@@ -86,6 +83,21 @@ namespace BulutERPAktarim.Forms
         private void AccordionElementAbout_Click(object sender, EventArgs e)
         {
             AboutForm frm = new AboutForm();
+            frm.ShowDialog();
+        }
+        private void btn_ProductPriceForm_Click(object sender, EventArgs e)
+        {
+            PriceUpdateForm frm = new PriceUpdateForm();
+            frm.ShowDialog();
+        }
+        private void btn_ProductPriceAdd_Click(object sender, EventArgs e)
+        {
+            PriceAddForm frm = new PriceAddForm();
+            frm.ShowDialog();
+        }
+        private void btn_ProductUpdate_Click(object sender, EventArgs e)
+        {
+            ProductUpdateForm frm = new ProductUpdateForm();
             frm.ShowDialog();
         }
     }

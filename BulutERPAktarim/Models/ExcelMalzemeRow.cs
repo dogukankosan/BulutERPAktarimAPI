@@ -27,6 +27,7 @@ namespace BulutERPAktarim.Models
         public decimal AlisFiyati { get; set; }
         public decimal Miktar { get; set; }
         public decimal KoliIcinMiktar { get; set; }
+
         /// <summary>Logo'da mevcut mu? (Excel yüklenince otomatik kontrol edilir)</summary>
         public bool LogodaVar { get; set; } = false;
 
@@ -36,20 +37,55 @@ namespace BulutERPAktarim.Models
         /// <summary>Logo kontrol ikonu — grid kolonunda gösterilir</summary>
         public string LogoDurumIkon =>
             !LogoKontrolEdildi ? "⏳" :
-             LogodaVar ? "✅ Logo'da Var" :
-                                 "";
+             LogodaVar ? "✅ Logo'da Var" : "";
+
         /// <summary>
         /// Grid gruplama için kullanılır.
         /// MT → kendi MalzemeKodu | TM → üstündeki MT'nin MalzemeKodu
-        /// Örnek: DEEP045PTKPDRALİL, DEEP045PTKPDRALİL26, 27, 28... hepsi aynı grupta
         /// </summary>
         public string GrupKodu { get; set; }
 
-        // Grid seçim (CheckBox)
-        public bool Sec { get; set; } = false;
+        /// <summary>
+        /// Satırın kilitli olup olmadığını belirler.
+        /// Kilitli satırlar seçilemez ve tekrar gönderilemez.
+        /// </summary>
+        public bool IsKilitli =>
+            LogodaVar ||
+            Durum == "Aktarıldı" ||
+            Durum == "Aktarıldı (Fiyat Hatası)" ||
+            Durum == "Aktarıldı (Fiş Hatası)" ||
+            Durum == "Zaten Var" ||
+            Durum == "Hata" ||
+            Durum == "Format Hatası";
+
+        // Grid seçim (CheckBox) — kilitli satırlar seçilemiyor
+        private bool _sec = false;
+        public bool Sec
+        {
+            get => _sec;
+            set
+            {
+                // Kilitli satıra true set etmeye çalışıyorsa engelle
+                if (value && IsKilitli)
+                    return;
+                _sec = value;
+            }
+        }
 
         // Aktarım durumu (UI için)
-        public string Durum { get; set; } = "Bekliyor";
+        private string _durum = "Bekliyor";
+        public string Durum
+        {
+            get => _durum;
+            set
+            {
+                _durum = value;
+                // Durum kilitli bir değere geçince seçimi otomatik kaldır
+                if (IsKilitli)
+                    _sec = false;
+            }
+        }
+
         public string HataMesaji { get; set; }
         public int SatirNo { get; set; }
 
@@ -59,7 +95,6 @@ namespace BulutERPAktarim.Models
         /// <summary>TM mi? (Ticari Mal)</summary>
         public bool IsTicariMal => Tur?.Trim().ToUpper() == "TM";
 
-        /// <summary>Geçerli satır mı?</summary>
         /// <summary>Geçerli satır mı?</summary>
         public bool IsValid =>
             !string.IsNullOrWhiteSpace(MalzemeKodu) &&

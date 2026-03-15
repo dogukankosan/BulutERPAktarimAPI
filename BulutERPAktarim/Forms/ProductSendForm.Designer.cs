@@ -20,6 +20,7 @@
             this.barManager = new DevExpress.XtraBars.BarManager(this.components);
             this.barTop = new DevExpress.XtraBars.Bar();
             this.barItemTemizle = new DevExpress.XtraBars.BarButtonItem();
+            this.btn_ExcelSablon = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -32,7 +33,6 @@
             this.groupControlDosya = new DevExpress.XtraEditors.GroupControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.textEditDosyaYolu = new DevExpress.XtraEditors.TextEdit();
-            this.btnDosyaSec = new DevExpress.XtraEditors.SimpleButton();
             this.groupControlFiltre = new DevExpress.XtraEditors.GroupControl();
             this.checkEditTK = new DevExpress.XtraEditors.CheckEdit();
             this.checkEditTM = new DevExpress.XtraEditors.CheckEdit();
@@ -75,7 +75,7 @@
             this.colDurum = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colHataMesaji = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemDurum = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
-            this.btn_ExcelSablon = new DevExpress.XtraBars.BarButtonItem();
+            this.btnDosyaSec = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
@@ -134,6 +134,13 @@
             this.barItemTemizle.Id = 3;
             this.barItemTemizle.Name = "barItemTemizle";
             this.barItemTemizle.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.BarItemTemizle_ItemClick);
+            // 
+            // btn_ExcelSablon
+            // 
+            this.btn_ExcelSablon.Caption = "|  Şablonu İndir";
+            this.btn_ExcelSablon.Id = 0;
+            this.btn_ExcelSablon.Name = "btn_ExcelSablon";
+            this.btn_ExcelSablon.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_ExcelSablon_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -210,9 +217,9 @@
             // 
             // groupControlDosya
             // 
+            this.groupControlDosya.Controls.Add(this.btnDosyaSec);
             this.groupControlDosya.Controls.Add(this.labelControl1);
             this.groupControlDosya.Controls.Add(this.textEditDosyaYolu);
-            this.groupControlDosya.Controls.Add(this.btnDosyaSec);
             this.groupControlDosya.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControlDosya.Location = new System.Drawing.Point(2, 392);
             this.groupControlDosya.Name = "groupControlDosya";
@@ -235,20 +242,6 @@
             this.textEditDosyaYolu.Properties.ReadOnly = true;
             this.textEditDosyaYolu.Size = new System.Drawing.Size(266, 20);
             this.textEditDosyaYolu.TabIndex = 1;
-            // 
-            // btnDosyaSec
-            // 
-            this.btnDosyaSec.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Warning;
-            this.btnDosyaSec.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.btnDosyaSec.Appearance.Options.UseBackColor = true;
-            this.btnDosyaSec.Appearance.Options.UseFont = true;
-            this.btnDosyaSec.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDosyaSec.Location = new System.Drawing.Point(10, 74);
-            this.btnDosyaSec.Name = "btnDosyaSec";
-            this.btnDosyaSec.Size = new System.Drawing.Size(128, 30);
-            this.btnDosyaSec.TabIndex = 2;
-            this.btnDosyaSec.Text = "📂  Dosya Seç";
-            this.btnDosyaSec.Click += new System.EventHandler(this.BtnDosyaSec_Click);
             // 
             // groupControlFiltre
             // 
@@ -715,12 +708,15 @@
             // 
             this.repositoryItemDurum.Name = "repositoryItemDurum";
             // 
-            // btn_ExcelSablon
+            // btnDosyaSec
             // 
-            this.btn_ExcelSablon.Caption = "|  Şablonu İndir";
-            this.btn_ExcelSablon.Id = 0;
-            this.btn_ExcelSablon.Name = "btn_ExcelSablon";
-            this.btn_ExcelSablon.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btn_ExcelSablon_ItemClick);
+            this.btnDosyaSec.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDosyaSec.Location = new System.Drawing.Point(10, 80);
+            this.btnDosyaSec.Name = "btnDosyaSec";
+            this.btnDosyaSec.Size = new System.Drawing.Size(266, 26);
+            this.btnDosyaSec.TabIndex = 3;
+            this.btnDosyaSec.Text = "📂  Dosya Seç";
+            this.btnDosyaSec.Click += new System.EventHandler(this.btnDosyaSec_Click);
             // 
             // ProductSendForm
             // 
@@ -788,7 +784,6 @@
         private DevExpress.XtraEditors.GroupControl groupControlDosya;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.TextEdit textEditDosyaYolu;
-        private DevExpress.XtraEditors.SimpleButton btnDosyaSec;
         private DevExpress.XtraEditors.GroupControl groupControlFiltre;
         private DevExpress.XtraEditors.CheckEdit checkEditTK;
         private DevExpress.XtraEditors.CheckEdit checkEditTM;
@@ -832,5 +827,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemDurum;
         private DevExpress.XtraEditors.SimpleButton btn_Group;
         private DevExpress.XtraBars.BarButtonItem btn_ExcelSablon;
+        private DevExpress.XtraEditors.SimpleButton btnDosyaSec;
     }
 }
